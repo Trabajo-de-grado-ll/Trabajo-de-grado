@@ -1,0 +1,3 @@
+[submodule "Tesis"]
+    path = Tesis
+    url = https://github.com/cscc5/django-tesis.git
