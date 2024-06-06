@@ -1,12 +1,14 @@
 # Llaves utilizadas en el proyecto
 Keys/
 
+#pagina web para jobai.io
+jobAI.github.io/
+
 # cache
 __pycache__/
 openai
 pd
 
-# Entorno virual
+# Environments
 tdeg_venv/
-
-/Tesis/main_app/Keys/
+tesis_venv/

@@ -101,12 +101,6 @@ class DataExtract():
         self.title = [element.text for element in self.driver.find_elements(By.CLASS_NAME, title)]
         self.location = [element.text for element in self.driver.find_elements(By.CLASS_NAME, location)]
         self.company = [element.text for element in self.driver.find_elements(By.CLASS_NAME, company)]
-     
-    def Guardar_perfiles(self):
-        df_jobs = pd.DataFrame({'title': self.title, 'location': self.location, 'company': self.company})
-        return df_jobs.to_csv(index=False)
-    
-
 
     def Guardar_perfiles(self):
         df_jobs = pd.DataFrame({'title': self.title, 'location': self.location, 'company': self.company})
@@ -155,3 +149,25 @@ class DataExtract():
             element.click()
         except Exception as e:
             print(f"Error al hacer clic en el botón del banner: {str(e)}")
+
+    def obtener_perfiles_final(self, title):
+        self.title = [element.text for element in self.driver.find_elements(By.CLASS_NAME, title)]
+
+    def guardar_perfiles_final(self):
+        df_jobs = pd.DataFrame({"title": self.title})
+        df_jobs.to_csv(index=False, mode="w")  # Guardar como CSV
+        return df_jobs  # Devolver el DataFrame
+
+    def obtener_perfiles_paginados_final(self, dato, num, xpath):
+        self.text_list = []  # Inicializa la lista vacía
+        self.text_list.extend([element.text for element in self.driver.find_elements(By.CLASS_NAME, dato)])  
+
+        for i in range(num):
+            self.busqueda_xpath(xpath).click()
+            time.sleep(4)
+            self.text_list.extend([element.text for element in self.driver.find_elements(By.CLASS_NAME, dato)])  # Agrega los elementos de la siguiente página
+
+    def guardar_perfiles_paginados_final(self):
+        df_jobs = pd.DataFrame({"title": self.text_list})
+        df_jobs.to_csv(index=False, mode="w")  # Guardar como CSV
+        return df_jobs  # Devolver el DataFrame
