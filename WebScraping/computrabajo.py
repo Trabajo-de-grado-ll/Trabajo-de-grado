@@ -10,5 +10,6 @@ time.sleep(1)
 computrabajo.busqueda_xpath("/html/body/main/div[2]/div[2]/div/button[1]").click() # Banner
 time.sleep(1)
 computrabajo.obtener_perfiles_paginados('js-o-link',3,'//*[@id="offersGridOfferContainer"]/div[8]/span[2]')
+computrabajo.Cerrar_drive()
 json = computrabajo.Guardar_perfiles_paginados()
 print(json)
